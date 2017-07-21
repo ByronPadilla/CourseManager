@@ -1,4 +1,5 @@
 import os.path
+import pathlib
 
 class courseManager:
     """
@@ -19,9 +20,9 @@ class courseManager:
         filename = self.prompt("Please enter a valid CourseManager File",
                                "\nError: File was not found; Please try again\n",
                                lambda a: os.path.isfile(a))
-
-        file = open(filename, 'r')
-        self.generate_courses(file.readline().strip())
+        path = pathlib.Path(filename)
+        with path.open() as infile:
+            self.generate_courses(infile.readline().strip())
 
         print(self.course_Dict)
 
