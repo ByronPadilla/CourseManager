@@ -1,10 +1,6 @@
-import CourseManager
+from CourseManager.course_manager import CourseManager
 
-def main():
-    myCourseManager = CourseManager.courseManager(1)
 
+if __name__ == '__main__':
+    myCourseManager = CourseManager(1)
     myCourseManager.run()
-
-
-if __name__ =="__main__":
-    main()

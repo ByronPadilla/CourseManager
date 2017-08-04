@@ -1,5 +1,6 @@
 import os.path
 import pathlib
+from .course import Course
 
 class CourseManager:
     """
@@ -41,17 +42,17 @@ class CourseManager:
                 print(err_message)
         return response
 
-    def generate_courses(self, line: str):
+    def generate_courses(self, line: str) -> {str: Course}:
         """
         Gathers the number of classes and the names of the classes from the first line of the read file.
         :param line: Str object representing the first line of the read file; Contains important information
         :return: None
         """
         classes = line.split(";")
-        self._num_courses = int (classes[0])
-        for course in range(len(classes)-1):
-            self._courses[classes[course + 1]] = None
-
+        self._num_courses = int(classes[0])
+        for course in classes[1:]:
+            self._courses[course] = None
+        return self._courses
 
     def _run(self, path_to_file: str) -> None:
         path = pathlib.Path(path_to_file)

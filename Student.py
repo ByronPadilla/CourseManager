@@ -1,1 +1,2 @@
-class Studnet:
+class Student:
+    pass
