@@ -20,10 +20,7 @@ class CourseManager:
         filename = self.prompt("Please enter a valid CourseManager File",
                                "\nError: File was not found; Please try again\n",
                                lambda a: os.path.isfile(a))
-        path = pathlib.Path(filename)
-        with path.open() as infile:
-            self.generate_courses(infile.readline().strip())
-
+        self._run(filename)
         print(self._courses)
 
     def prompt(self, message: str, err_message: str, is_valid: callable) -> str:
@@ -56,9 +53,10 @@ class CourseManager:
             self._courses[classes[course + 1]] = None
 
 
-
-
-
-
-
-
+    def _run(self, path_to_file: str) -> None:
+        path = pathlib.Path(path_to_file)
+        if not path.is_file():
+            raise ValueError('"{0}" is not a valid file'.format(path_to_file))
+        with path.open() as infile:
+            for line in infile:
+                self.generate_courses(line.strip())
