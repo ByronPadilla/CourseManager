@@ -1,6 +1,10 @@
 import os.path
 import pathlib
-from .course import Course
+from Course import Course
+
+
+## Student version that will be sync up with his teachers -- this one will require us to know the students schedule and his
+## teachers name.
 
 class CourseManager:
     """
@@ -46,7 +50,7 @@ class CourseManager:
         """
         Gathers the number of classes and the names of the classes from the first line of the read file.
         :param line: Str object representing the first line of the read file; Contains important information
-        :return: None
+        :return: Dict with courses as keys and none as its value (will later be student objects)
         """
         classes = line.split(";")
         self._num_courses = int(classes[0])
@@ -54,10 +58,21 @@ class CourseManager:
             self._courses[course] = None
         return self._courses
 
+
+    def generate_students(self, num_of_students: int) ->{str: Students}:
+        """
+        """
+
+
+
     def _run(self, path_to_file: str) -> None:
         path = pathlib.Path(path_to_file)
         if not path.is_file():
             raise ValueError('"{0}" is not a valid file'.format(path_to_file))
         with path.open() as infile:
-            for line in infile:
-                self.generate_courses(line.strip())
+            self.generate_courses(infile.readline().strip())
+
+            for line in range(self._num_courses):
+                num_of_students, course = infile.readline().split(";")
+                self._courses[course] = self.generate_students(int(num_of_students))
+

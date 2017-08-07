@@ -6,8 +6,13 @@ class Course:
     Course has the following properities:
 
     Attributes:
-        student_Dict: Dictionary of Students in the Course.
+        student_set: Dictionary of Students in the Course.
         count_Student: The Number of Studnets in the Course.
 
     """
-    pass
+    def __init__(self, num_of_courses: int):
+        self._courses = {}
+        self._num_courses = num_of_courses
+
+
+
